@@ -61,6 +61,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ClearSavedScores()
+    {
+        File.Delete(saveFilePath);
+    }
     public PlayerData PlayerWithBestScore{
         get{
             return savedPlayerData;
