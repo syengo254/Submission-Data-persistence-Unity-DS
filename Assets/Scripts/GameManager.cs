@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public AudioSource gameMusic;
     public PlayerData currentPlayerData;
     private PlayerData savedPlayerData;
     string saveFilePath;
@@ -36,6 +37,11 @@ public class GameManager : MonoBehaviour
     public void SetCurrentScore(int score)
     {
         currentPlayerData.Score = score;
+    }
+
+    public void ToggleMusic()
+    {
+        gameMusic.mute = !SettingsManager.Instance.musicOn;
     }
 
     public void SaveNewHighScore()

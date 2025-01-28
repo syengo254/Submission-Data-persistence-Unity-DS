@@ -22,8 +22,9 @@ public class SettingsUIHandler : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void ToggleGameMusic()
+    public void HandleMusicToggle()
     {
         SettingsManager.Instance.musicOn = musicToggle.isOn;
+        GameManager.Instance.ToggleMusic();
     }
 }
