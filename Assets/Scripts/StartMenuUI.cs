@@ -20,7 +20,8 @@ public class StartMenuUI : MonoBehaviour
         gameManager = GameManager.Instance;
         if(gameManager.gameStarted)
         {
-            playerBestScoreText.text = $"Best Score : {gameManager.currentPlayerData.Name} : {gameManager.currentPlayerData.BestScore}";
+            playerBestScoreText.gameObject.SetActive(true);
+            playerBestScoreText.text = $"Best Score : {gameManager.PlayerWithBestScore.Name} : {gameManager.PlayerWithBestScore.Score}";
         }
     }
 

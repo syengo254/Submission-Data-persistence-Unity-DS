@@ -12,6 +12,9 @@ public class MainUIHandler : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
+
+        var bestPlayerScoreData = gameManager.PlayerWithBestScore;
+        BestScoreText.text = $"Best Score : {bestPlayerScoreData.Name} : {bestPlayerScoreData.Score}";
     }
 
     
@@ -20,22 +23,13 @@ public class MainUIHandler : MonoBehaviour
         
     }
 
-    public void UpdateScores(int m_Points)
+    public void UpdateScoresUI()
     {
         if(gameManager != null){
-            if(m_Points > gameManager.currentPlayerData.BestScore)
-            {
-                gameManager.currentPlayerData.BestScore = m_Points;
-            }
-
             var bestPlayerScoreData = gameManager.PlayerWithBestScore;
-            if(m_Points > bestPlayerScoreData.BestScore)
-            {
-                gameManager.SaveNewHighScore();
-                BestScoreText.text = $"Best Score : {bestPlayerScoreData.Name} : {bestPlayerScoreData.BestScore}";
-            }
 
-            ScoreText.text = $"Score : {m_Points}";
+            BestScoreText.text = $"Best Score : {bestPlayerScoreData.Name} : {bestPlayerScoreData.Score}";
+            ScoreText.text = $"Score : {gameManager.currentPlayerData.Score}";
         }
     }
 }

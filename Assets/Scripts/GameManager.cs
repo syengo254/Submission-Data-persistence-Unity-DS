@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
             currentPlayerData = new PlayerData()
             {
                 Name = "",
-                BestScore = 0
+                Score = 0
             };
             saveFilePath = Path.Join(Application.persistentDataPath, "_playerScores.json");
 
@@ -34,11 +34,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetCurrentScore(int score)
+    {
+        currentPlayerData.Score = score;
+
+        if(currentPlayerData.Score > PlayerWithBestScore.Score){
+            SaveNewHighScore();
+        }
+    }
+
     public void SaveNewHighScore()
     {
-        if(!File.Exists(saveFilePath) || savedPlayerData.BestScore < currentPlayerData.BestScore)
+        if(!File.Exists(saveFilePath) || savedPlayerData.Score < currentPlayerData.Score)
         {
             string data = JsonUtility.ToJson(currentPlayerData);
+            savedPlayerData = currentPlayerData;
             File.WriteAllText(saveFilePath, data);
         }
     }
@@ -66,6 +76,6 @@ public class GameManager : MonoBehaviour
     public class PlayerData
     {
         public string Name;
-        public int BestScore;
+        public int Score;
     }
 }

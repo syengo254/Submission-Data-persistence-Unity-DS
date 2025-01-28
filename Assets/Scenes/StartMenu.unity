@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBestScoreText: {fileID: 1204044534}
-  playerHighestScoreText: {fileID: 0}
   playerNameInput: {fileID: 2017565061}
 --- !u!1 &202735447
 GameObject:
@@ -348,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7a35892395a7489d35aadf613f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
+  currentPlayerData:
     Name: 
     BestScore: 0
   gameStarted: 0
@@ -701,7 +700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1204044533
 RectTransform:
   m_ObjectHideFlags: 0

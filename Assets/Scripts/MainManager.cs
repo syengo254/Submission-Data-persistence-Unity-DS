@@ -65,7 +65,8 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        mainUIHandlerScript.UpdateScores(m_Points);
+        GameManager.Instance.SetCurrentScore(m_Points);
+        mainUIHandlerScript.UpdateScoresUI();
     }
 
     public void LoadStartMenu()
