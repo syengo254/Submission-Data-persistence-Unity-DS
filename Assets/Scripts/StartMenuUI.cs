@@ -51,4 +51,9 @@ public class StartMenuUI : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+
+    public void OpenScoreboard()
+    {
+        SceneManager.LoadScene("ScoreboardScene");
+    }
 }
