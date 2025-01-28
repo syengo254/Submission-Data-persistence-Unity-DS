@@ -18,9 +18,9 @@ public class StartMenuUI : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        if(gameManager.gameStarted)
+        
+        if(gameManager.PlayerWithBestScore.Name.Length > 0)
         {
-            playerBestScoreText.gameObject.SetActive(true);
             playerBestScoreText.text = $"Best Score : {gameManager.PlayerWithBestScore.Name} : {gameManager.PlayerWithBestScore.Score}";
         }
     }
@@ -45,7 +45,6 @@ public class StartMenuUI : MonoBehaviour
     {
         SetPlayerName();
         gameManager.GetSavedHighScore();
-        gameManager.gameStarted = true;
         SceneManager.LoadScene("main");
     }
 

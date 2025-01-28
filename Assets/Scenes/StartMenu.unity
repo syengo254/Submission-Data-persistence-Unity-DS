@@ -349,7 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPlayerData:
     Name: 
-    BestScore: 0
+    Score: 0
   gameStarted: 0
 --- !u!4 &327059109
 Transform:
@@ -700,7 +700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1204044533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -753,7 +753,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Best Score: Name: 0'
+  m_Text: 'Best Score: 0'
 --- !u!222 &1204044535
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -81,5 +81,6 @@ public class MainManager : MonoBehaviour
 
         // save game here too
         GameManager.Instance.SaveNewHighScore();
+        mainUIHandlerScript.UpdateScoresUI();
     }
 }

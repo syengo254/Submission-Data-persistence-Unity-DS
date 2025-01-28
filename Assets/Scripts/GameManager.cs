@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public PlayerData currentPlayerData;
     private PlayerData savedPlayerData;
-    public bool gameStarted = false;
     string saveFilePath;
 
     private void Awake()
@@ -37,10 +36,6 @@ public class GameManager : MonoBehaviour
     public void SetCurrentScore(int score)
     {
         currentPlayerData.Score = score;
-
-        if(currentPlayerData.Score > PlayerWithBestScore.Score){
-            SaveNewHighScore();
-        }
     }
 
     public void SaveNewHighScore()
