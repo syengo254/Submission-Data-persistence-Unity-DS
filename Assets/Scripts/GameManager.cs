@@ -8,9 +8,12 @@ using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public AudioSource gameMusic;
     public PlayerData currentPlayerData;
     private PlayerData savedPlayerData;
     string saveFilePath;
+    string scoresfilePath;
+    bool highScoreChange = false;
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class GameManager : MonoBehaviour
                 Score = 0
             };
             saveFilePath = Path.Join(Application.persistentDataPath, "_playerScores.json");
+            scoresfilePath = Path.Join(Application.persistentDataPath, "_allplayerscores.json");
 
             GetSavedHighScore();
             DontDestroyOnLoad(gameObject);
@@ -38,12 +42,22 @@ public class GameManager : MonoBehaviour
         currentPlayerData.Score = score;
     }
 
+    public void ToggleMusic()
+    {
+        gameMusic.mute = !SettingsManager.Instance.musicOn;
+    }
+
     public void SaveNewHighScore()
     {
-        if(!File.Exists(saveFilePath) || savedPlayerData.Score < currentPlayerData.Score)
+        if(!File.Exists(saveFilePath) || currentPlayerData.Score > savedPlayerData.Score)
         {
-            string data = JsonUtility.ToJson(currentPlayerData);
-            savedPlayerData = currentPlayerData;
+            savedPlayerData = new PlayerData()
+            {
+                Score = currentPlayerData.Score,
+                Name = currentPlayerData.Name
+            };
+            highScoreChange = true;
+            string data = JsonUtility.ToJson(savedPlayerData);
             File.WriteAllText(saveFilePath, data);
         }
     }
@@ -57,14 +71,62 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            savedPlayerData = currentPlayerData;
+            savedPlayerData = new PlayerData()
+            {
+                Score = currentPlayerData.Score,
+                Name = currentPlayerData.Name
+            };
+            highScoreChange = true;
         }
     }
 
+    public void ClearSavedScores()
+    {
+        File.Delete(saveFilePath);
+        File.Delete(scoresfilePath);
+    }
     public PlayerData PlayerWithBestScore{
         get{
             return savedPlayerData;
         }
+    }
+
+    public FileData LoadScoresFromFile()
+    {
+        if(File.Exists(scoresfilePath)){
+            string data = File.ReadAllText(scoresfilePath);
+            return JsonUtility.FromJson<FileData>(data);
+        }
+
+        return null;
+    }
+
+    public void SaveScoresToFile()
+    {
+        if(!highScoreChange) return;
+
+        highScoreChange = false;
+        FileData data = new FileData();
+        FileData fileData = LoadScoresFromFile();
+
+        if(fileData != null)
+        {
+            foreach(var item in fileData.scoreboard)
+            {
+                data.scoreboard.Add(item);
+            }
+        }
+
+        data.scoreboard.Add(PlayerWithBestScore);
+        
+        string serialData = JsonUtility.ToJson(data);
+        File.WriteAllText(scoresfilePath, serialData);
+    }
+
+    [Serializable]
+    public class FileData
+    {
+        public List<PlayerData> scoreboard = new ();
     }
 
     [Serializable]

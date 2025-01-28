@@ -47,5 +47,13 @@ public class StartMenuUI : MonoBehaviour
         gameManager.GetSavedHighScore();
         SceneManager.LoadScene("main");
     }
+    public void OpenSettings()
+    {
+        SceneManager.LoadScene(2);
+    }
 
+    public void OpenScoreboard()
+    {
+        SceneManager.LoadScene("ScoreboardScene");
+    }
 }
